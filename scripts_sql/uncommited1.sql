@@ -1,0 +1,19 @@
+CREATE DATABASE ASS3;
+USE ASS3;
+
+DROP TABLE IF EXISTS accounts;
+
+CREATE TABLE accounts (
+    id INT PRIMARY KEY,
+    balance INT
+);
+
+INSERT INTO accounts (id, balance) VALUES
+(1, 1000),
+(2, 2000);
+
+SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+START TRANSACTION;
+UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+ROLLBACK;
+SELECT * FROM accounts WHERE id = 1;
